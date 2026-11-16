@@ -6,11 +6,11 @@
 
 ## 網站內容
 
-- **Options 101**：第 1 章選擇權基本概念、第 2 章四大部位與到期損益；第 3–6 章在首頁標示為「規劃中」。
-- **四篇完整商品頁**：FX Forward、FX Vanilla Option、DCI、FX Swap。每頁都具統一七段（Product Overview → Product Structure → Payoff & P&L → Pricing Drivers → Use Cases → Risk Analysis → Practical Q&A）。
+- **Options 101**：六章已建立：選擇權基本概念、四大部位、Option Pricing & IV、Option Greeks、Option Strategies、Applied Derivatives。
+- **六篇完整商品頁**：FX Forward、FX Vanilla Option、DCI、FX Swap、IRS、Commodity Swap。每頁都具統一七段（Product Overview → Product Structure → Payoff & P&L → Pricing Drivers → Use Cases → Risk Analysis → Practical Q&A）。
 - **Option Payoff Lab**：四種選擇權部位、即時可調參數與到期淨損益曲線。
 - **雙層分類**：`derivative / structured` × `fx / rates / commodity / equity`。
-- **品質驗證頁**：`tests.html`（網頁頁尾「品質驗證」）在瀏覽器即時執行 15 項固定測試；右側按版本標明已重測的 Node 結果及尚待完成的瀏覽器驗收，舊版歷史快照與每次驗收細節以 `log.md` 為準。
+- **品質驗證頁**：`tests.html`（網頁頁尾「品質驗證」）在瀏覽器即時執行 15 項固定測試；右側按版本標明已重測的 Node 結果及尚待完成的方案 C 瀏覽器驗收，舊版歷史快照與每次驗收細節以 `log.md` 為準。
 - **規則與擴充**：`AGENTS.md` 規定 AI 新增商品的準備、內容、檔案、檢查及回報流程。
 
 ## 課堂參考與本專案延伸（來源標註）
@@ -78,9 +78,10 @@ git push -u origin main
 ```bash
 node tests/payoff.test.cjs
 node tests/site.test.cjs
+node tests/course.test.cjs
 ```
 
-GitHub Actions 會在每次 push/PR 時執行這兩項 Node 測試；瀏覽器 `tests.html` 仍需自行開啟，手機版與金融內容仍需人工確認。完整清單見 `docs/QA.md`。
+本機原始工作流程亦納入新的課程測試；上傳後需確認 `.github/workflows/ci.yml` 存在且 Actions 實際執行，否則不能宣稱 CI 已啟用。瀏覽器 `tests.html` 仍需自行開啟，手機版與金融內容仍需人工確認。完整清單見 `docs/QA.md`。
 
 ## AI 如何繼續擴充？
 
@@ -109,26 +110,35 @@ AI 應依規則處理檔案與測試，但**金融正確性、網站驗收與最
 │   └── test-browser.js
 ├── options-101/
 │   ├── chapter-01/index.html
-│   └── chapter-02/index.html
+│   ├── chapter-02/index.html
+│   ├── chapter-03/index.html
+│   ├── chapter-04/index.html
+│   ├── chapter-05/index.html
+│   └── chapter-06/index.html
 ├── products/
 │   ├── fx-forward/index.html
 │   ├── fx-vanilla-option/index.html
 │   ├── dci/index.html
-│   └── fx-swap/index.html
+│   ├── fx-swap/index.html
+│   ├── irs/index.html
+│   └── commodity-swap/index.html
 ├── lab/index.html
 ├── content/
 │   ├── README.md
 │   ├── fx-forward.md
 │   ├── fx-vanilla-option.md
 │   ├── dci.md
-│   └── fx-swap.md
+│   ├── fx-swap.md
+│   ├── irs.md
+│   └── commodity-swap.md
 ├── templates/
 │   ├── content-template.md
 │   └── product-template.html
 ├── tests/
 │   ├── test-cases.js
 │   ├── payoff.test.cjs
-│   └── site.test.cjs
+│   ├── site.test.cjs
+│   └── course.test.cjs
 └── docs/
     ├── QA.md
     ├── COURSE_REFERENCE.md
@@ -141,3 +151,9 @@ AI 應依規則處理檔案與測試，但**金融正確性、網站驗收與最
 - 網站所有數字示例均為**假設數據**，不是實際銀行或客戶資料。
 - DCI 示例只呈現特定假設契約，不代表所有 DCI 的結構或轉換規則。
 - 尚未取得使用者 GitHub Repository；此壓縮包本身**不是已部署的網站**。
+
+## 2026-11-16 方案 C：完整內容實作（尚未部署）
+
+在既有 v1.1 與 FX Swap 擴充實驗基礎上，額外新增 IRS、Commodity Swap 兩篇完整商品及 Options 101 四個章節，首頁不再留有規劃中卡片。**這是本機產出的候選版本，不等於已經上傳或完成瀏覽器／擁有者驗收。**
+
+本機 Node 已通過 `payoff.test.cjs`、`site.test.cjs`、`course.test.cjs`；新增課程測試會動態掃描現有頁面並驗算 HTML 內 41 個金融數值，不把 6 個商品或 6 章寫死。方案 C 的金融內容與公開部署須經擁有者再確認。隱藏設定檔 `.nojekyll`、`.github/workflows/ci.yml` 已隨完整 ZIP 提供，但 GitHub 網頁版上傳可能遺漏，必須逐一在 Repository 核對。

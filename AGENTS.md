@@ -45,7 +45,7 @@
 ## 3. 固定檔案結構與命名
 
 - `index.html`：首頁、完整商品卡片、規劃中卡片及學習路徑。
-- `options-101/chapter-01/index.html`、`chapter-02/index.html`：已完成的基礎課程。
+- `options-101/chapter-01/index.html` 至 `chapter-06/index.html`：已建立的六章基礎課程；新增章節時沿用原有版型、導覽與站內連結。
 - `products/<slug>/index.html`：商品教學頁（例如 `products/fx-swap/index.html`）。
 - `content/<slug>.md`：金融商品原始稿，**先寫稿再做 HTML**。
 - `templates/content-template.md`：新商品內容稿的模板（開頭欄位、七個標題、公式／提示框／表格寫法）。
@@ -53,7 +53,7 @@
 - `assets/style.css`：唯一共用設計系統。既有全站樣式只能經檢查後修改，不要為新商品重寫一套 CSS。
 - `assets/payoff.js`：標準到期損益純函數，必須持續相容現有測試。
 - `tests.html`：瀏覽器端的到期損益單元測試。
-- `tests/payoff.test.cjs`：Node 損益測試；`tests/site.test.cjs`：網站結構與站內連結檢查。`site.test.cjs` 會**自動掃描** `content/` 與 `products/`，新增商品時不需要、也不應該修改它。
+- `tests/payoff.test.cjs`：Node 損益測試；`tests/site.test.cjs`：網站結構與站內連結檢查；`tests/course.test.cjs`：動態掃描 Options 101 與所有已存在商品頁、核對站內連結，並從 HTML 讀取教學參數與結果重新計算的補充測試（不取代原有兩項）；不得寫死商品或章節總數，也不可因有新規劃中卡片而失敗。`site.test.cjs` 會**自動掃描** `content/` 與 `products/`，新增商品時不需要、也不應該修改它。
 - `log.md`：每次工作記錄、未完成事項及驗收紀錄。
 - `docs/QA.md`：自動／人工驗收清單。
 
@@ -148,7 +148,7 @@
 | Long Call | 100 | 5 | 105 | 0 | 損益兩平 |
 | Short Put | 100 | 5 | 0 | −95 | 下檔極端損失 |
 
-**Node（如本機已安裝）：** `node tests/payoff.test.cjs` 檢查損益函數；`node tests/site.test.cjs` 檢查檔案結構、商品頁七段順序、必填雙層分類、相對連結是否存在、公開頁尾聲明。兩個命令都必須 0 exit code。`site.test.cjs` 另會檢查：內容稿開頭欄位格式、內容稿與頁面分類一致、`products/` 每個資料夾都有內容稿、首頁連到每個已發布商品、首頁三處商品數量正確（依內容稿分類自動計算）、內容稿裡的站內連結能從 `content/` 打開、未出現「保本／穩賺／保證收益」宣傳用語。
+**Node（如本機已安裝）：** `node tests/payoff.test.cjs` 檢查損益函數；`node tests/site.test.cjs` 檢查檔案結構、商品頁七段順序、必填雙層分類、相對連結是否存在、公開頁尾聲明。三個命令都必須 0 exit code（新增 `node tests/course.test.cjs`）。`site.test.cjs` 另會檢查：內容稿開頭欄位格式、內容稿與頁面分類一致、`products/` 每個資料夾都有內容稿、首頁連到每個已發布商品、首頁三處商品數量正確（依內容稿分類自動計算）、內容稿裡的站內連結能從 `content/` 打開、未出現「保本／穩賺／保證收益」宣傳用語。
 
 **測試失敗時：修正內容或頁面，不得為了讓測試通過而修改、刪除或放寬 `tests/` 裡的檢查。** 若認為規則本身有誤，停下來向擁有者說明原因，由擁有者決定是否修改規則，並記錄在 `log.md`。GitHub 上有 `.github/workflows/ci.yml`，push 時會執行 Node 測試，但這**不等於 GitHub Pages 會自動執行瀏覽器測試**。
 
@@ -187,3 +187,9 @@
 3. 實驗暴露的規則缺口（損益定義、點數與交割慣例、瀏覽器受阻、篇幅與數值精度）促成本版 v1.1；**不得捏造 AI 曾犯錯或測試失敗**。實際成果與待驗範圍見 `log.md`。
 4. **Git 歷史需真實反映上傳順序**：保留已存在的 Repository Commit；如果 v1.0 已在 GitHub，則先將 FX Swap 擴充建立新 Commit，再將 v1.1 文件修訂建立下一個 Commit。不得重建、倒填日期或改寫歷史來模擬不存在的操作。
 5. 本機版本為 `published` **不等於**已部署 GitHub Pages；上傳後仍須核對正式網址，並且與本機 Node／瀏覽器／人工驗收結果分開記錄。
+
+## 11. 課堂參考與修改來源標註
+
+- 本專案參考老師第九週「換你當老闆」的 Agentic Work 工作方法（成品／限制／驗收、規則檔、新工作先讀取、內容與網頁分工），**不是老師示範網站原始碼的直接改寫**。參考依據與本專案自行延伸的對照見 `README.md`、`docs/COURSE_REFERENCE.md`。
+- 後續開發與對外說明須區分 **【課堂方法參考】**、**【本專案設計與 AI 協作實作】**、**【後續修訂與驗收】**；不得將參考方法表述為沿用老師程式，亦不得將 AI 協作產出說成全部由本人手寫。
+- 若未來確實引用第三方程式碼、圖像或資料，必須在使用前確認授權與來源，並於 README／來源文件明確標註；不得默默複製。新增商品時不必重複標註每個頁面，只在來源或實作方法變更時更新對照文件。

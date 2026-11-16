@@ -204,3 +204,45 @@
 - GitHub 上傳、實際 Commit ID、Pages 新版本部署、擁有者 9 頁三寬度及即時 15/15 的公開站檢查：本次工作**沒有執行**，不得宣稱完成。
 - FX Swap 原稿比其他三篇商品長得多；v1.1 建立篇幅審查門檻。本次保留完整風險與現金流教學，日後可再依閱讀體驗精簡，不能為了達到字數目標刪除風險說明。
 
+
+## 2026-11-16 — 方案 C：補齊規劃中六個內容入口（本機候選版本；未發布）
+
+**Changed（本機）：**
+- 依 `AGENTS.md v1.1` 及既有樣板新增 `content/irs.md`、`products/irs/index.html`（`derivative + rates`）、`content/commodity-swap.md`、`products/commodity-swap/index.html`（`derivative + commodity`）；各含固定七段教學、條件與風險、可重算的假設案例及公開參考來源。
+- 補齊 `options-101/chapter-03` 至 `chapter-06` 四章：定價與 IV、Greeks、選擇權策略、企業避險；新增折疊問答、跨章連結、標註假設與風險。
+- `index.html`：新增已完成卡片、Options 101 6/6、商品 6 published/0 planned、衍生商品 5 項／結構型商品 1 項及學習路徑；移除未完成的卡片空白占位。`options-101/chapter-02/index.html` 增加下一章連結。
+- 同步更新 `content/README.md`、`README.md`、`AGENTS.md` 檔案索引、`tests.html` 驗證快照、`docs/QA.md`、`docs/SUBMISSION.md`。原有 CSS、Payoff Lab、四個既有商品的金融內容與原兩支 Node 測試均未修改。
+- 新增 `tests/course.test.cjs` 對六章、15 個頁面、HTML 內部連結、問答折疊標籤及四組假設數值執行檢查；本機 `.github/workflows/ci.yml` 加入第三支測試。原有 `.nojekyll`、`.github/workflows/ci.yml` 均包含在完整 ZIP，但**本次未能獨立核實 GitHub 遠端是否已有這兩個隱藏檔**。
+
+**Tests（實際在本機執行，非 GitHub CI）：**
+- `node tests/payoff.test.cjs` → PASS（14 計算案例＋3 無效輸入檢查）。
+- `node tests/site.test.cjs` → PASS（6 published products / **11** test-script-scoped public pages / 155 HTML links / 10 Markdown links）。
+- `node tests/course.test.cjs` → PASS（**15** HTML pages，包括 Options 101 六章 / 144 distinct local page links / 四個新章節的折疊問答與四組示例算術）。
+- 新增 IRS 現金流季度示例、Commodity Swap 實物＋金融結算、Bull Call Spread、Protective Put、進口商 FX 選擇權案例均採明定假設。
+
+**Manual QA / Unverified：**
+- 嘗試 Playwright + Chromium 使用 `file:///mnt/data/academy_work/derivatives-academy/index.html`，結果 `net::ERR_BLOCKED_BY_ADMINISTRATOR`；改用 `http://127.0.0.1:19879/` 亦受阻。因此本次未實際完成 15 頁 × 375／768／1280px 的渲染、console 與水平捲動驗證。
+- 新的兩篇商品金融內容與四章敘述仍需要擁有者逐章確認，不得宣稱已通過金融人工驗收。
+- 無 GitHub 上傳、無新增 Git Commit、無 Pages 部署；原本使用者已上線的 FX Swap v1.1 站點不受影響。
+- 這次額外完整化不取代已完成的 FX Swap 跨對話 AGENTS 擴充實驗；未來要新增其他主題仍可依同一規則進行。
+
+
+## 2026-11-16 — 方案 C 測試規則修正、擴充性反證與流程誠實揭露（本機候選）
+
+**問題與修正**
+- 先前新增的 `tests/course.test.cjs` 強制要求「6 個完整商品／6/6 章／不得有 planned 卡片」，造成未來新增第 7 個商品時，即使遵守規則也會失敗。這是新測試的設計問題；並非既有 `site.test.cjs` 或商品頁面錯誤。
+- 已重構補充測試：動態掃描 `products/` 與 `options-101/` 現有章節，核對首頁章節數、已存在頁面與站內連結；允許正常的 planned 卡片。商品數量及分類仍由原有 `site.test.cjs` 依內容稿動態計算。**未改動原有兩支測試。**
+- 原測試的固定算術式只會證明程式中自行寫入的數值正確，無法識別 HTML 教學表格打錯。已改為讀取實際網頁中的假設及情境表格，重新驗算 IRS、Commodity Swap、Options 101 第 03–06 章，共核對 **41 個 HTML 已顯示的金融數值**。此為特定示例的靜態交叉核對，仍不能代替金融完整性／瀏覽器人工驗收。
+- `AGENTS.md` 中補充測試描述改為「動態數量與實際 HTML 案例交叉驗算」，並同步更新 README、品質驗證文字與 QA 文件。**保留 AGENTS.md 版本 1.1；未新增無證據的測試完成宣稱。**
+
+**本機驗證**
+- `node tests/payoff.test.cjs` → PASS（原有測試未改）。
+- `node tests/site.test.cjs` → PASS（6 published／11 個原測試範圍內頁面／155 HTML 連結／10 Markdown 連結）。
+- `node tests/course.test.cjs` → PASS（15 HTML 頁、6 個 Options 101 章節、6 個商品、144 條站內連結、41 個實際 HTML 金融數值）。
+- 隔離副本模擬第七個 `ccs` published 商品及一張 planned 卡片：`site.test.cjs`、`course.test.cjs` 均 PASS；模擬檔**沒有**保留在交付 ZIP。
+- 故意將 IRS HTML 表格中單期現金流 +12,500 改成 +12,501：補充測試依預期 FAIL；恢復 +12,500 後 PASS，驗證它有檢查網頁而非只檢查寫死數字。
+
+**AGENTS.md 流程例外／尚待擁有者確認**
+- IRS、Commodity Swap 這次由 AI 直接完成內容稿與 HTML，**沒有在 Build 前停下來等待擁有者審核草稿**，不符合 `AGENTS.md` 第 7 節要求的完整 Plan → Draft → Review → Build 先後順序。不得事後補寫不存在的 Review 紀錄。即使本機公式交叉核對通過，仍屬**擁有者金融審核待確認**的候選版。
+- 另一份 AI 回報聲稱已在 Chrome 測試 15 頁 × 3 寬度、且 `tests.html` 15/15；本次未取得可獨立核實的原始瀏覽器檢查輸出或螢幕截圖，因此只記錄為「外部檢查回報」，**本次未獨立完成瀏覽器 QA**。
+- 未修改公開 GitHub、尚未確認遠端 `.nojekyll`／`.github/workflows/ci.yml` 是否存在，也未部署方案 C。
