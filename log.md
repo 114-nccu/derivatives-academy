@@ -246,3 +246,36 @@
 - IRS、Commodity Swap 這次由 AI 直接完成內容稿與 HTML，**沒有在 Build 前停下來等待擁有者審核草稿**，不符合 `AGENTS.md` 第 7 節要求的完整 Plan → Draft → Review → Build 先後順序。不得事後補寫不存在的 Review 紀錄。即使本機公式交叉核對通過，仍屬**擁有者金融審核待確認**的候選版。
 - 另一份 AI 回報聲稱已在 Chrome 測試 15 頁 × 3 寬度、且 `tests.html` 15/15；本次未取得可獨立核實的原始瀏覽器檢查輸出或螢幕截圖，因此只記錄為「外部檢查回報」，**本次未獨立完成瀏覽器 QA**。
 - 未修改公開 GitHub、尚未確認遠端 `.nojekyll`／`.github/workflows/ci.yml` 是否存在，也未部署方案 C。
+
+
+## 2026-11-16｜正式部署與 GitHub Actions 驗收
+
+### 部署與版本紀錄
+
+本專案已將方案 C 完整版上傳至 GitHub Repository 的 `main` 分支，並透過 GitHub Pages 發布。
+
+重要開發階段及對應 Commit：
+
+- `d5ea6e5`：原始網站與 AGENTS.md v1.0。
+- `a011a9e`：依 AGENTS.md 新增 FX Swap 商品。
+- `a128925`：根據擴充實驗修訂 AGENTS.md v1.1。
+- `1022b89`：補齊 IRS、Commodity Swap 與 Options 101 第 03～06 章。
+- `4a15a3f`：初次建立 GitHub Actions 工作流程。
+- `9bba374`：修正 CI 工作流程內容，完成自動測試設定。
+
+以上 Commit 短碼依 GitHub 歷史核對結果記錄。
+
+### 最終測試及部署
+
+- GitHub Repository 已包含 `.nojekyll` 及 `.github/workflows/ci.yml`。
+- 2026-11-16 GitHub Actions `Tests #2` 顯示成功。
+- 2026-11-16 GitHub Pages `pages build and deployment #10` 顯示成功。
+- 本機三支 Node 測試均通過，包含損益公式、網站結構及課程內容驗證。
+- 正式網站已更新為六篇商品教學與六章 Options 101。
+- GitHub Actions 的成功結果不等於所有金融內容均已完成人工審核，亦不代表瀏覽器響應式 QA 已由 CI 自動完成。
+
+### 補充說明
+
+先前 `log.md` 所記錄的「尚未上傳 GitHub」、「未確認 CI」及「尚未部署方案 C」，均為當時開發階段的狀態。本節補記後續實際完成的部署及驗收結果，不覆蓋原始開發紀錄。
+
+若本次紀錄更新後再次觸發 GitHub Actions，應以新一筆執行結果確認後續狀態。
