@@ -1,1 +1,25 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify option payoff formulas
+        run: node tests/payoff.test.cjs
+
+      - name: Verify site structure and links
+        run: node tests/site.test.cjs
+
+      - name: Verify course content
+        run: node tests/course.test.cjs
 
