@@ -182,3 +182,25 @@
 - FX Swap 的遠端腿相對到期價值、跨日期名目現金流、折現 MTM 與完整 Net P&L 的區分仍需範本明確化（延續 Draft 階段觀察）。
 - FX Swap 的 pip/point 顯示慣例、近端非標準 Spot 交割也仍是範本未細分之處。
 - 當瀏覽器被環境政策禁止存取本機頁面，AGENTS.md 尚未提供「阻擋時如何記錄未完成的瀏覽器 QA、何時可更新歷史快照」的具體替代流程；本次如實保留舊版快照、不虛構新版本驗收。
+
+## 2026-11-16 — FX Swap 擴充後的規則修訂與分項 QA（AGENTS.md v1.1）
+
+**Changed**
+- `AGENTS.md`：由 v1.0 更新至 v1.1；新增 FX Swap 的跨交割日現金流／遠端腿相對價值／到期前 MTM／Net P&L 分界、Swap Points 單位及交割日、示例小數精度與篇幅檢查、瀏覽器受阻時的記錄與交接，以及真實 Git Commit 順序。
+- `content/fx-swap.md`、`products/fx-swap/index.html`：僅將遠期匯率的超長小數精簡為 6 位，Swap Points 同步以約數顯示，保留原有以較高精度計算的 TWD 現金流及情境結果；避免將展示精度誤認成市場報價精度。
+- `tests.html`：更新右側為「FX Swap 擴充版的 Node 檢查結果」，明列 4 商品／9 頁的**已完成**測試，並保留 3 商品／8 頁的歷史快照說明；新版瀏覽器及正式站檢查繼續標為待驗，左側 15 項即時測試的程式未改。
+- `docs/QA.md`：改成分別記錄 Node／瀏覽器／人工驗收的版本與範圍。
+- `README.md`：更新品質驗證文字與商品／內容稿檔案樹，沒有調整網站程式。
+- `docs/SUBMISSION.md`：將「未來擴充 FX Swap」修正為已實際完成的本機擴充實驗，Git Commit 與新版公開站驗收仍保留待填欄位。
+- 原有 `tests/`、`assets/`、其他三個商品頁與 Options 101 均不修改。
+
+**Tests / scope**
+- 已在本次工作環境重新嘗試 Playwright + Chromium：`file://` 與 `http://127.0.0.1:18765/tests.html` 均出現 `net::ERR_BLOCKED_BY_ADMINISTRATOR`；故此環境無法獨立確認 9 頁 375／768／1280px 與 `tests.html` 15/15。狀態：**BLOCKED（非 FAIL，亦非 PASS）**。
+- 另一份 AI 回報宣稱 2026-11-16 的 9 頁、375／768／1280px、無 console 錯誤、`tests.html` 15/15 已通過，但該報告未隨 ZIP 附可重現的截圖／執行紀錄；**本次只記載回報，不將其視為本次獨立確認的 PASS**。
+- 已從公開來源頁面檢索核對 BIS〈Accounting for FX swaps, forwards and repurchase agreements: a simple analysis〉、CFTC〈Swaps Report Data Dictionary〉及 Federal Reserve〈Foreign exchange contracts (Table 1)〉，內容支持 FX Swap 的兩腿與反向換匯定義；Fed 為歷史定義文件，不應表述為最新報價或交易慣例。網站中的利率與匯率維持標示為假設。
+
+**Manual QA / Unverified**
+- FX Swap 金融數值及兩腿方向已做公式檢查；新增 HTML 在正式公開站的畫面、操作及外部連結點選仍待擁有者核對。
+- GitHub 上傳、實際 Commit ID、Pages 新版本部署、擁有者 9 頁三寬度及即時 15/15 的公開站檢查：本次工作**沒有執行**，不得宣稱完成。
+- FX Swap 原稿比其他三篇商品長得多；v1.1 建立篇幅審查門檻。本次保留完整風險與現金流教學，日後可再依閱讀體驗精簡，不能為了達到字數目標刪除風險說明。
+

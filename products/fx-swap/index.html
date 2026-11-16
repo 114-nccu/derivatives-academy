@@ -41,11 +41,11 @@
 </tr>
 <tr>
   <td>遠端匯率 F</td>
-  <td>USD/TWD 31.84373304395（依第 04 段簡化模型計算的假設理論值，非銀行成交報價）</td>
+  <td>USD/TWD 31.843733（依第 04 段簡化模型計算的假設理論值，非銀行成交報價）</td>
 </tr>
 <tr>
   <td>Swap Points：F − S</td>
-  <td>−0.15626695605 TWD/USD，約 −1,562.6696 個 <strong>TWD pips</strong>（本例明定 1 pip = 0.0001 TWD/USD；不同交易系統的點數顯示慣例須核實）</td>
+  <td>−0.156267 TWD/USD，約 −1,562.67 個 <strong>TWD pips</strong>（本例明定 1 pip = 0.0001 TWD/USD；不同交易系統的點數顯示慣例須核實）</td>
 </tr>
 <tr>
   <td>結算方式</td>
@@ -87,7 +87,7 @@
 <div class="notice info"><strong>補充：</strong> 本例展示的是「近端取得 USD、遠端交還 USD」。實際企業必須在遠端備妥 USD 100,000；如果近端收到的美元已用於支付貨款，仍需有另一筆美元流入、融資或換匯安排才能履行遠端義務。FX Swap 不會自動替企業創造美元收入。</div>
 </section><section class="article-section" id="payoff" data-section="payoff"><span class="section-label">SECTION 03</span><h2>Payoff &amp; P&amp;L <small class="muted">／損益分析</small></h2><p>FX Swap 的兩腿都存在<strong>本金交換義務</strong>。它不是以單一選擇權履約價計算的到期內含價值（Option Payoff）；應分開看<strong>合約現金流（Contractual Cash Flows）</strong>、<strong>到期前市價（Mark-to-Market, MTM）</strong>以及<strong>包含資金成本與相關業務現金流的淨損益（Net P&amp;L）</strong>。</p>
 <p>在本例「近端買 USD／遠端賣 USD」的方向下，遠端 USD 收付固定，約定收到的 TWD 也固定；後續市場匯率的變動不會改變原契約的交割金額，但會改變提前平倉或重置部位的經濟價值。</p>
-<div class="formula">假設：USD/TWD，S = 32.000000 TWD/USD，F = 31.84373304395 TWD/USD，N = USD 100,000。<br>Near Leg 的 TWD 現金流 = −N × S = −TWD 3,200,000.00。<br>Far Leg 的 TWD 現金流 = +N × F ≈ +TWD 3,184,373.30。<br>兩腿 TWD 名目收付差額 = N × (F − S) ≈ −TWD 15,626.70。<br>兩腿 USD 名目收付差額 = +N − N = USD 0。</div>
+<div class="formula">假設：USD/TWD，S = 32.000000 TWD/USD，F = 31.843733 TWD/USD，N = USD 100,000。<br>Near Leg 的 TWD 現金流 = −N × S = −TWD 3,200,000.00。<br>Far Leg 的 TWD 現金流 = +N × F ≈ +TWD 3,184,373.30。<br>兩腿 TWD 名目收付差額 = N × (F − S) ≈ −TWD 15,626.70。<br>兩腿 USD 名目收付差額 = +N − N = USD 0。</div>
 <p><strong>如何解讀 −TWD 15,626.70？</strong> 這是<strong>不同日期 TWD 收付的未折現算術差額</strong>，並非可以直接認列的 Net P&amp;L。因為企業在近端支付 TWD 並持有／使用 USD 90 天，應將兩幣別融資、存款、業務現金流、折現及費用放在同一基準比較；不能把不同日期的資金流直接加總後稱為「損失」。</p>
 <p>為了示範遠端市場風險，假設遠端交割日當天企業<strong>不以手中原有美元交割，而是按當日 USD/TWD 即期匯率買回 USD 100,000 來履行賣美元義務</strong>；假設沒有買賣價差、手續費、違約或其他現金流，以下僅計算<strong>遠端賣 USD 合約相對於當日即期賣 USD 的差額</strong>：</p>
 <div class="formula">遠端賣 USD 合約的到期相對價值（TWD）= (F − Sₜ) × N。<br>Sₜ = 遠端交割日的假設 USD/TWD 即期匯率（TWD/USD）。<br>此式只衡量遠端腿的相對價值，不是完整 FX Swap 的 Net P&amp;L。</div>
@@ -108,7 +108,7 @@
   <td style="text-align:right"><strong>+TWD 84,373.30</strong></td>
 </tr>
 <tr>
-  <td>31.84373304395 TWD/USD</td>
+  <td>31.843733 TWD/USD</td>
   <td style="text-align:right">TWD 3,184,373.30</td>
   <td style="text-align:right">TWD 3,184,373.30</td>
   <td style="text-align:right"><strong>約 TWD 0</strong></td>
@@ -125,12 +125,12 @@
 <p><strong>重要區分：遠端腿相對價值 ≠ 整筆 FX Swap 交易損益。</strong> 例如 Sₜ = 33.00 TWD/USD 時，表列 −TWD 115,626.70 僅比較「遠端固定賣出 USD」與「到期按即期賣出 USD」的差額；它不代表企業從近端取得美元、在期間內運用美元並最終履行兩腿後的總體損益。若企業原本就有足額到期美元流入，可依約交付而無須到期再買入美元；若美元流入延誤，則需額外籌資。完整 Net P&amp;L 必須指定評價幣別與同一評價時點，納入近端收付、美元資產或用途、台幣機會成本、融資或存款利息、到期實際現金流、折現、交易成本及信用事件（如有），不能單由 (F − Sₜ) × N 或 N × (F − S) 推得。</p>
 </section><section class="article-section" id="pricing" data-section="pricing"><span class="section-label">SECTION 04</span><h2>Pricing Drivers <small class="muted">／定價因子</small></h2><p>典型 FX Swap 的兩個成交匯率可寫成：<strong>近端匯率 S</strong> 以及 <strong>遠端匯率 F = S + Swap Points</strong>。Swap Points 是以<strong>報價幣／基準幣</strong>表達的匯率差，符號必須連同 USD/TWD 報價方向閱讀；它不是單獨的固定收益率，也不等於市場對未來 Spot 的預測。</p>
 <p>在假設兩種貨幣的資金利率都可在同一期限取得、採可比的<strong>單利</strong>年化慣例，且忽略跨幣別基差、買賣價差、不同抵押條款、信用與流動性成本時，簡化無套利關係為：</p>
-<div class="formula">貨幣對：USD/TWD（1 USD = S TWD）；S、F 單位均為 TWD/USD。<br>F = S × (1 + r_TWD × T) / (1 + r_USD × T)<br>Swap Points = F − S（TWD/USD）<br><br>假設 S = 32.00 TWD/USD；r_TWD = 2.00%／年；r_USD = 4.00%／年；<br>T = 90/365 年；兩利率均假設適用同一 90 天期間與單利日數基礎。<br>F = 32.00 × [1 + 0.02 × (90/365)] / [1 + 0.04 × (90/365)]<br>  ≈ 31.84373304395 TWD/USD。<br>Swap Points ≈ −0.15626695605 TWD/USD（≈ −1,562.6696 pips，若 1 pip = 0.0001 TWD/USD）。</div>
+<div class="formula">貨幣對：USD/TWD（1 USD = S TWD）；S、F 單位均為 TWD/USD。<br>F = S × (1 + r_TWD × T) / (1 + r_USD × T)<br>Swap Points = F − S（TWD/USD）<br><br>假設 S = 32.00 TWD/USD；r_TWD = 2.00%／年；r_USD = 4.00%／年；<br>T = 90/365 年；兩利率均假設適用同一 90 天期間與單利日數基礎。<br>F = 32.00 × [1 + 0.02 × (90/365)] / [1 + 0.04 × (90/365)]<br>  ≈ 31.843733 TWD/USD。<br>Swap Points ≈ −0.156267 TWD/USD（≈ −1,562.67 pips，若 1 pip = 0.0001 TWD/USD）。</div>
 <p>本例假設 USD 利率高於 TWD 利率，故在上述簡化條件下 <strong>F 低於 S</strong>，即 USD 以 TWD 表示的遠期貼水。<strong>這不是預測 USD/TWD 90 天後一定下跌。</strong></p>
 <p>影響實際報價或 MTM 的因素包括：近端匯率、兩幣別相同交割區間的可交易資金曲線、剩餘天期、跨幣別基差（Cross-Currency Basis）、市場供需與流動性、信用與抵押安排、買賣價差，以及兩腿的交割日／假日規則。若兩腿不是 Spot／Forward 組合，應改以<strong>近端與遠端各自的交割日</strong>推導期間點數，而非直接套用本例 90 天的 Spot-to-Forward 公式。</p>
 <div class="notice info"><strong>補充：</strong> 這是刻意簡化的理論示例。實際交易涉及不同貨幣的市場慣例、報價小數位、tom/next、折現曲線與資金基差；未取得特定合約與可驗證市場報價前，不能宣稱本頁的 F、Swap Points 或 pips 是任何銀行可成交的價格。</div>
 </section><section class="article-section" id="cases" data-section="cases"><span class="section-label">SECTION 05</span><h2>Use Cases <small class="muted">／應用情境</small></h2><h3>案例：企業需要短期美元資金，但不希望永久變更持有幣別</h3>
-<p><strong>假設</strong>台灣企業持有 TWD 3,200,000，近期需暫時使用 USD 100,000，並預計 90 天後另有 USD 100,000 應收款（這筆遠端美元流入也是假設，尚須評估能否如期收款）。在教學假設的 USD/TWD 32.00 及簡化遠端匯率 31.84373304395 下，企業透過 FX Swap 近端付 TWD 3,200,000 換入 USD 100,000；遠端交出 USD 100,000，換回約 TWD 3,184,373.30。</p>
+<p><strong>假設</strong>台灣企業持有 TWD 3,200,000，近期需暫時使用 USD 100,000，並預計 90 天後另有 USD 100,000 應收款（這筆遠端美元流入也是假設，尚須評估能否如期收款）。在教學假設的 USD/TWD 32.00 及簡化遠端匯率 31.843733 下，企業透過 FX Swap 近端付 TWD 3,200,000 換入 USD 100,000；遠端交出 USD 100,000，換回約 TWD 3,184,373.30。</p>
 <p>此結構可把「這段期間取得美元、未來換回台幣」兩個需求合併約定。<strong>它管理的是資金期限與匯率交換安排，而不是保證資金成本更低</strong>。評估時仍應和直接借入 USD、持有 TWD 的機會成本、對手方額度、信用支持及銀行買賣價差比較。若遠端美元應收款延遲或落空，原本看似配對的交割義務將變成額外資金壓力。</p>
 <p><strong>反向案例（不另設定數字）：</strong> 若企業近端持有 USD、需要暫時取得 TWD，可以反向交易：近端賣 USD／買 TWD，遠端買 USD／賣 TWD；兩腿現金流的正負方向與本例相反。</p>
 </section><section class="article-section" id="risks" data-section="risks"><span class="section-label">SECTION 06</span><h2>Risk Analysis <small class="muted">／風險分析</small></h2><ul>

@@ -10,7 +10,7 @@
 - **四篇完整商品頁**：FX Forward、FX Vanilla Option、DCI、FX Swap。每頁都具統一七段（Product Overview → Product Structure → Payoff & P&L → Pricing Drivers → Use Cases → Risk Analysis → Practical Q&A）。
 - **Option Payoff Lab**：四種選擇權部位、即時可調參數與到期淨損益曲線。
 - **雙層分類**：`derivative / structured` × `fx / rates / commodity / equity`。
-- **品質驗證頁**：`tests.html`（網頁頁尾「品質驗證」）在瀏覽器即時執行 15 項固定測試；右側為標註日期的本機檢查**歷史快照**，後續版本的實際驗收結果以 `log.md` 為準。
+- **品質驗證頁**：`tests.html`（網頁頁尾「品質驗證」）在瀏覽器即時執行 15 項固定測試；右側按版本標明已重測的 Node 結果及尚待完成的瀏覽器驗收，舊版歷史快照與每次驗收細節以 `log.md` 為準。
 - **規則與擴充**：`AGENTS.md` 規定 AI 新增商品的準備、內容、檔案、檢查及回報流程。
 
 ## 課堂參考與本專案延伸（來源標註）
@@ -113,13 +113,15 @@ AI 應依規則處理檔案與測試，但**金融正確性、網站驗收與最
 ├── products/
 │   ├── fx-forward/index.html
 │   ├── fx-vanilla-option/index.html
-│   └── dci/index.html
+│   ├── dci/index.html
+│   └── fx-swap/index.html
 ├── lab/index.html
 ├── content/
 │   ├── README.md
 │   ├── fx-forward.md
 │   ├── fx-vanilla-option.md
-│   └── dci.md
+│   ├── dci.md
+│   └── fx-swap.md
 ├── templates/
 │   ├── content-template.md
 │   └── product-template.html

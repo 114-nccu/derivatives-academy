@@ -6,7 +6,7 @@
 
 ## 1. 專案簡介
 
-我建立了「Derivatives Academy｜衍生性金融商品互動知識庫」，以繁體中文介紹衍生性金融商品與結構型投資商品，特別針對尚未修習選擇權課程的初學者。第一版包含 Options 101 前兩章、FX Forward、FX Vanilla Option 與 DCI 三篇教學內容，以及可切換四種部位的選擇權到期損益模擬器。
+我建立了「Derivatives Academy｜衍生性金融商品互動知識庫」，以繁體中文介紹衍生性金融商品與結構型投資商品，特別針對尚未修習選擇權課程的初學者。目前包含 Options 101 前兩章、FX Forward、FX Vanilla Option、DCI 與後續依 AGENTS.md 擴充的 FX Swap 四篇商品教學，以及可切換四種部位的選擇權到期損益模擬器。
 
 網站採用「商品類型 × 標的市場」雙層分類，每篇商品使用固定七段架構（商品介紹、交易結構、損益分析、定價因子、應用情境、風險分析、實務問答），並註明金融案例假設與投資風險。
 
@@ -16,25 +16,30 @@
 
 ## 2. GitHub Repository
 
-`[上傳後貼上實際 Repository 網址]`
+`https://github.com/114-nccu/derivatives-academy`
 
 ## 3. 網頁連結
 
-`[GitHub Pages 實際公開後貼上網址]`
+`https://114-nccu.github.io/derivatives-academy/`（FX Swap 新版是否已部署，上傳後再檢查）
 
 ## 4. AGENTS.md
 
-Repository 根目錄的 `AGENTS.md`：[發布後填入連結]
+Repository 根目錄的 [`AGENTS.md`](https://github.com/114-nccu/derivatives-academy/blob/main/AGENTS.md)。
 
 我在 `AGENTS.md` 定義網站目的、雙層分類、七段固定教學模板、檔案命名、先撰寫內容稿再製作網頁的順序、金融事實與資料安全限制，以及自動測試和人工驗收的標準。
 
-## 5. 新增內容時，規則如何幫助 AI？
+## 5. 新對話擴充實驗：規則如何幫助 AI？
 
-例如未來希望新增「FX Swap」時，我可以在一個新的 AI 開發對話中，先讓 AI 閱讀 `AGENTS.md`，再依既有檔案結構建立 Markdown 原稿與商品頁、填寫兩層分類、更新首頁導覽、執行測試並回報差異。AI 依規則產出內容，**我則依照驗收清單檢查金融正確性與頁面品質，確認後再發布**。這讓同一套規則可重複用於不同金融商品。
+我以原本的完整專案與 **AGENTS.md v1.0** 開啟全新 AI 開發對話，請 AI 新增 FX Swap，先依照七段模板產生 `content/fx-swap.md`（draft），經過金融公式與兩腿現金流審核後，才允許進入 Build。AI 接著建立 `products/fx-swap/index.html`、更新首頁四個已發布商品入口及數量，並執行原有 Node 測試，沒有擅自改動既有測試、CSS 與原本三篇商品。
 
-**實證補充（只有實際執行後再填）：**
-- 新對話新增 FX Swap 的 Git Commit：`[實際 commit URL]`
-- 原先規則缺失、更新 AGENTS.md 的具體差異：`[寫出你真正修正了什麼]`
-- 15/15 瀏覽器測試與 Node/人工驗收：`[實際結果]`
+**已在本機重新確認：** `node tests/payoff.test.cjs` PASS（14 個計算案例、3 個無效輸入）；`node tests/site.test.cjs` PASS（4 商品、9 頁、123 個 HTML 站內連結、9 個 Markdown 連結）。金融示例使用 USD/TWD 假設匯率及利率，已核對近遠端現金流與 Swap Points，並區分到期相對價值和整體 Net P&L。
 
-> 不要將未執行的擴充測試、未完成的部署或金融審查寫成已完成。
+**規則迭代：** 實驗顯示 v1.0 沒有明確要求區分 FX Swap 的跨日現金流、到期相對價值、MTM 與整體損益，也未統一點數單位、非 Spot 近端交割、頁面篇幅／數字精度及瀏覽器被阻擋時的處理。據此修訂 **AGENTS.md v1.1**；屬於規格改善，並非虛構 AI 曾有金融數值錯誤。
+
+**待完成／不得冒稱已完成：** 新版 FX Swap 在正式 GitHub Pages 的部署與手動點擊、瀏覽器 375／768／1280px 的獨立檢查、公開頁面 `tests.html` 即時結果，仍須以實際操作核實。另一 AI 曾回報九頁三種寬度皆 PASS，但本次環境無法重現，故不能以此取代完整證據。Commit 連結亦須以上傳後 GitHub 真正產生的網址填寫。
+
+- FX Swap 擴充 Git Commit：`[完成上傳後填入真實 URL]`
+- v1.1 規則修訂 Git Commit：`[完成上傳後填入真實 URL]`
+- 公開網站驗收：`[親自測試並記錄通過項目／日期]`
+
+> 保留 GitHub 既有 Commit 歷史。不可為了重建演示流程而重寫已存在的提交紀錄。
