@@ -14,3 +14,4 @@
 | `fx-forward.md` | derivative / fx | published |
 | `fx-vanilla-option.md` | derivative / fx | published |
 | `dci.md` | structured / fx | published |
+| `fx-swap.md` | derivative / fx | published |

@@ -128,3 +128,57 @@
 **Manual QA / Unverified**
 - 本次僅更新文件，未重新執行瀏覽器視覺檢查或金融內容人工複核；先前紀錄仍是歷史快照。
 - 尚未由本次工作確認 GitHub Pages 公開部署；尚未在新對話完成 FX Swap 擴充實驗，因此 `AGENTS.md` 不標記為 v1.1。
+
+## 2026-11-16 — 新對話 FX Swap 擴充實驗：Plan / Draft（等待擁有者 Review）
+
+**Changed**
+- 依 `AGENTS.md v1.0` 先閱讀 `README.md`、`log.md`、`templates/content-template.md`、`content/fx-forward.md` 及既有 FX Forward HTML；核對 `content/README.md`、檔案樹及 `tests/site.test.cjs` 的 draft 行為。
+- 新增 `content/fx-swap.md`，分類 `derivative + fx`、slug `fx-swap`、`status: draft`、`numeric_examples: hypothetical`；保留固定七段及至少三題 Q&A。
+- 先修：已發布的 `products/fx-forward/index.html`。預定頁面路徑 `products/fx-swap/index.html`，**此階段不建立**。
+- 原有 `index.html`、HTML 商品頁、CSS、JavaScript、`tests/`、`tests.html` 與 `AGENTS.md` 均未修改。
+
+**Tests**
+- `node tests/payoff.test.cjs` → PASS（14 個損益案例＋3 個無效輸入檢查）。
+- `node tests/site.test.cjs` → PASS（3 個已發布商品、8 個公開 HTML 頁、108 個 HTML 連結、9 個 Markdown 連結；FX Swap 保持 draft，未公開）。
+- 本階段未執行 `tests.html` 瀏覽器測試或視覺檢查，不沿用先前快照宣稱新版通過。
+
+**Manual QA / Unverified**
+- 金融內容、價值與風險說明均為 AI 起草，待擁有者人工 Review；尚未 Build / Link / 瀏覽器 375、768、1280px QA / GitHub Pages 驗收。
+- 無銀行即時報價或內部客戶資料；假設示例不代表市場可成交價格。
+
+**規則不足／實驗觀察（僅記錄實際發現，未改 AGENTS.md）**
+- `AGENTS.md` 與 `templates/content-template.md` 強調 FX 商品公式的幣別與單位，但未明確規範 FX Swap 在「跨日期名目現金流差額」「到期相對價值」「折現 MTM」「含融資成本 Net P&L」四者的區別；本次起草時需自行補充說明，建議擁有者評估是否寫入未來 v1.1。
+- 範本未規範 Swap Points 的 pip/point 顯示慣例、標準即期與非標準近端交割的區別；本稿明定示例的 pip 單位，且對不同市場慣例保留限制。此為文件規格缺口，不是已觀察到的測試失敗。
+
+## 2026-11-16 — FX Swap 擴充實驗：Build → Link → Test → QA Report → Log
+
+**Changed**
+- `products/fx-swap/index.html`：新增 FX Swap 正式七段教學頁，依 FX Forward 頁既有的導覽／共用 CSS／表格／公式／風險提示／頁尾樣式。分類 `derivative + fx`；相對路徑由商品頁位置重新計算。
+- `content/fx-swap.md`：擁有者同意進入建置流程後改為 `published`；第 03 節強化「遠端腿到期相對價值 ≠ 整筆 FX Swap Net P&L」，保留 USD/TWD、本金 USD 100,000、近遠端現金流與原簡化定價數字。增加公開來源清單；頁面與內容稿語義同步。
+- `index.html`：將 FX Swap 不可點的 planned 卡片改為可點的 published 卡片；同步更新 `4 published / 2 planned`、`4 個完整商品`、`已上線：衍生性商品 3 項、結構型商品 1 項`、右側內容清單，以及學習路徑中 FX Swap 的先修順序。
+- `content/README.md`、`README.md`：更新已發布商品清單與總數，並把 README 的下一次 AI 擴充指示改為泛指下一個商品。
+- `tests.html`：**保留原 2026-11-16 舊版 3 商品／8 頁的測試數字**；將檢查欄明確標示為 FX Swap 加入前的歷史快照，並說明其不代表新版本的瀏覽器／人工驗收。即時 15 項損益檢查邏輯未修改。
+- `log.md`：本紀錄。`AGENTS.md`、`assets/`、`tests/`、其他三篇商品頁及 Options 101 均未更動。
+
+**Public Sources**
+- BIS〈Accounting for FX swaps, forwards and repurchase agreements: a simple analysis〉：https://www.bis.org/publications/accounting-fx-swaps-forwards-and-repurchase-agreements-simple-analysis
+- CFTC〈Swaps Report Data Dictionary — FX Products〉：https://www.cftc.gov/MarketReports/SwapsReports/DataDictionary/index.htm
+- Federal Reserve FX instrument definitions：https://www.federalreserve.gov/apps/reportingforms/Download/DownloadAttachment?guid=b444f4b1-e14c-477f-9a58-ea25f5268809
+- 本次曾透過公開網頁檢索核對來源定義；來源支持 FX Swap 交易結構，但不支持本頁的教學假設利率、匯率可實際成交。
+
+**Tests（本次實際執行）**
+- `node tests/payoff.test.cjs` → PASS（14 個損益案例＋3 個無效輸入檢查）。
+- `node tests/site.test.cjs` → PASS（4 published、9 public HTML pages、123 HTML links、9 Markdown links）。
+- HTML 靜態檢視：新商品頁具 7 個依序的 `data-section`、3 個公式區塊、3 張表格、可用的 FX Forward 先修站內連結與 3 個公開來源連結。
+- 嘗試以 Playwright + Chromium 對本機 9 頁、375／768／1280px 進行 QA；開啟 `file://` 與 `http://127.0.0.1:8765/` 均遭環境阻擋（`net::ERR_BLOCKED_BY_ADMINISTRATOR`），**沒有完成實際頁面渲染、水平捲動量測或 console 檢查**。不可記為 PASS。
+- 本次無法於瀏覽器開啟 `tests.html`，故沒有核實新版瀏覽器端即時 15/15；Node 計算測試通過不等於瀏覽器端通過。
+
+**Manual QA / Unverified**
+- 專案擁有者已檢視 Draft 並同意進入建置；第 03 節新補的文字、公開頁面效果及最終金融內容仍待擁有者人工逐頁確認。
+- 尚待完成 375／768／1280px 三種寬度的實際瀏覽器檢查、首頁卡片點選實測、新版 `tests.html` 15/15 實測、GitHub Pages 公開網址驗收。
+- 沒有上傳 GitHub、沒有建立 Git commit、沒有進行 GitHub Pages 部署。
+
+**本次規則不足觀察（未修改 AGENTS.md v1.0）**
+- FX Swap 的遠端腿相對到期價值、跨日期名目現金流、折現 MTM 與完整 Net P&L 的區分仍需範本明確化（延續 Draft 階段觀察）。
+- FX Swap 的 pip/point 顯示慣例、近端非標準 Spot 交割也仍是範本未細分之處。
+- 當瀏覽器被環境政策禁止存取本機頁面，AGENTS.md 尚未提供「阻擋時如何記錄未完成的瀏覽器 QA、何時可更新歷史快照」的具體替代流程；本次如實保留舊版快照、不虛構新版本驗收。

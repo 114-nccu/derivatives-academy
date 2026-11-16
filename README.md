@@ -7,7 +7,7 @@
 ## 網站內容
 
 - **Options 101**：第 1 章選擇權基本概念、第 2 章四大部位與到期損益；第 3–6 章在首頁標示為「規劃中」。
-- **三篇完整商品頁**：FX Forward、FX Vanilla Option、DCI。每頁都具統一七段（Product Overview → Product Structure → Payoff & P&L → Pricing Drivers → Use Cases → Risk Analysis → Practical Q&A）。
+- **四篇完整商品頁**：FX Forward、FX Vanilla Option、DCI、FX Swap。每頁都具統一七段（Product Overview → Product Structure → Payoff & P&L → Pricing Drivers → Use Cases → Risk Analysis → Practical Q&A）。
 - **Option Payoff Lab**：四種選擇權部位、即時可調參數與到期淨損益曲線。
 - **雙層分類**：`derivative / structured` × `fx / rates / commodity / equity`。
 - **品質驗證頁**：`tests.html`（網頁頁尾「品質驗證」）在瀏覽器即時執行 15 項固定測試；右側為標註日期的本機檢查**歷史快照**，後續版本的實際驗收結果以 `log.md` 為準。
@@ -23,7 +23,7 @@
 | **【課堂方法參考】** | 第 22–24 頁：以 `AGENTS.md`／`CLAUDE.md` 保存專案規則，讓新工作能先讀取 | 建立本專案的 `AGENTS.md`，規範先讀文件、先有內容稿，再新增頁面及記錄變更 |
 | **【課堂方法參考】** | 老師公開 repo `diveai-lab/diveai-lessons` 的 `CLAUDE.md`：先寫內容稿再生成網頁、`log.md` 變更紀錄、英文 slug、新頁面加首頁卡片 | `AGENTS.md` 第 3、6、7 節採用相同的工作順序與紀錄方式，內容依金融教學重新撰寫，未複製其文字或程式碼 |
 | **【課堂方法參考】** | 第 26–28 頁：「呆一布講義」以規則檔、內容、素材、網頁分工 | 依金融教學需求區分 `content/`、`products/`、`templates/`、`assets/`；未複製示範網站版型或素材 |
-| **【本專案設計與 AI 協作實作】** | — | 衍生性金融商品主題、雙層分類、固定七段商品內容、Options 101、三個商品教學頁 |
+| **【本專案設計與 AI 協作實作】** | — | 衍生性金融商品主題、雙層分類、固定七段商品內容、Options 101、既有三個商品教學頁及後續 FX Swap 擴充 |
 | **【本專案設計與 AI 協作實作】** | — | 四種選擇權部位的 Payoff Lab、公式測試、網站結構及站內連結檢查 |
 | **【後續修訂與驗收】** | 課堂強調明確驗收與持續改善規則 | 將自動檢查與人工檢查分開、修正 Markdown 路徑、改善品質驗證頁；各次實際修改見 `log.md` |
 
@@ -86,7 +86,7 @@ GitHub Actions 會在每次 push/PR 時執行這兩項 Node 測試；瀏覽器 `
 
 將 Repo 交給可讀寫本機檔案的 AI 開發工具，在**新的對話**要求：
 
-> 請先完整閱讀 AGENTS.md、README.md、log.md，然後為本網站新增 FX Swap 商品頁。依七段標準完成內容稿與網頁，填入兩層分類，更新首頁入口、執行測試，最後列出修改檔案與仍需我人工核實的金融內容。
+> 請先完整閱讀 AGENTS.md、README.md、log.md，然後為本網站新增下一個商品教學頁。依七段標準完成內容稿與網頁，填入兩層分類，更新首頁入口、執行測試，最後列出修改檔案與仍需我人工核實的金融內容。
 
 AI 應依規則處理檔案與測試，但**金融正確性、網站驗收與最終發布都需由專案擁有者確認**。參考 `AGENTS.md` 第 7–10 節。
 
