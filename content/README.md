@@ -15,3 +15,5 @@
 | `fx-vanilla-option.md` | derivative / fx | published |
 | `dci.md` | structured / fx | published |
 | `fx-swap.md` | derivative / fx | published |
+| `irs.md` | derivative / rates | published（本機擴充；需擁有者金融審核） |
+| `commodity-swap.md` | derivative / commodity | published（本機擴充；需擁有者金融審核） |

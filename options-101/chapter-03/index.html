@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><meta name="description" content="把權利金拆成內含價值與時間價值，理解隱含波動率為何同時影響 Call 和 Put。"><title>Options 101 第 3 章｜Option Pricing &amp; IV｜權利金與隱含波動率 | Derivatives Academy</title><link rel="stylesheet" href="../../assets/style.css"></head><body>
+<a href="#main" style="position:absolute;left:-10000px;top:auto">跳至主要內容</a>
+<header class="topbar"><div class="topbar-inner"><a href="../../index.html" class="brand"><span class="brand-mark" aria-hidden="true">Δ</span><span>Derivatives Academy</span></a><nav class="topnav" aria-label="主要導覽"><a href="../../index.html#library">商品知識庫</a><a href="../../options-101/chapter-01/index.html" aria-current="page">Options 101</a><a href="../../lab/index.html">Payoff Lab</a></nav></div></header>
+<main id="main"><div class="page-hero"><div class="container"><div class="breadcrumbs"><a href="../../index.html">首頁</a><span>/</span><a href="../../index.html#options">Options 101</a><span>/</span>03｜Option Pricing & IV｜權利金與隱含波動率</div><div class="eyebrow">OPTIONS 101 / CHAPTER 03</div><h1>03｜Option Pricing & IV｜權利金與隱含波動率</h1><p class="lede">把權利金拆成內含價值與時間價值，理解隱含波動率為何同時影響 Call 和 Put。</p><div class="pill-row"><span class="tag teal">Foundations</span><span class="tag">約 10 分鐘</span><span class="tag gold">教學案例均為假設</span></div></div></div><div class="container article-layout"><aside class="toc" aria-label="章節導覽"><h2>On this page</h2><a href="#premium">權利金從哪裡來？</a><a href="#intrinsic">內含價值與時間價值</a><a href="#iv">IV 是市場價格隱含的波動假設</a><a href="#case">實例：猜對方向還是可能虧損</a><a href="#check">自我檢查與參考資料</a></aside><article class="article-body"><section class="article-section" id="premium"><span class="section-label">01 / PREMIUM</span><h2>權利金從哪裡來？</h2><p><strong>權利金（Option Premium）</strong>不只是「到期能賺多少」。在到期前、相同時點的標準選擇權，可以用<strong>內含價值（Intrinsic Value）＋時間價值（Time Value / Extrinsic Value）</strong>理解其組成。到期前的交易價格還會反映波動率、剩餘期限、利率與買賣價差。</p>
+<p>以簡化每股股票選擇權為例，假設目前標的 <strong>S = USD 108／股</strong>，履約價 <strong>K = USD 100／股</strong>，市場 Call 權利金 <strong>USD 12／股</strong>。其中現在即可衡量的內含價值為 USD 8，其餘 USD 4 是時間價值。這不是任何真實市場報價。</p>
+<blockquote>
+<p><strong>提醒：</strong> 這一章討論到期前的<strong>權利金與理論價格</strong>，並不是到期後的 Net P&amp;L；後者仍須扣除買方曾支付的權利金。</p>
+</blockquote>
+</section><section class="article-section" id="intrinsic"><span class="section-label">02 / INTRINSIC</span><h2>內含價值與時間價值</h2><div class="formula">Call Intrinsic = max(S − K, 0)<br>Put  Intrinsic = max(K − S, 0)<br>Time Value = Option Premium − Intrinsic Value</div>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>假設商品（每股）</th>
+  <th style="text-align:right">當前標的 S</th>
+  <th style="text-align:right">履約價 K</th>
+  <th style="text-align:right">權利金</th>
+  <th style="text-align:right">內含價值</th>
+  <th style="text-align:right">時間價值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Call</td>
+  <td style="text-align:right">USD 108</td>
+  <td style="text-align:right">USD 100</td>
+  <td style="text-align:right">USD 12</td>
+  <td style="text-align:right">USD 8</td>
+  <td style="text-align:right">USD 4</td>
+</tr>
+<tr>
+  <td>Put</td>
+  <td style="text-align:right">USD 92</td>
+  <td style="text-align:right">USD 100</td>
+  <td style="text-align:right">USD 11</td>
+  <td style="text-align:right">USD 8</td>
+  <td style="text-align:right">USD 3</td>
+</tr>
+<tr>
+  <td>價外 Call</td>
+  <td style="text-align:right">USD 95</td>
+  <td style="text-align:right">USD 100</td>
+  <td style="text-align:right">USD 2</td>
+  <td style="text-align:right">USD 0</td>
+  <td style="text-align:right">USD 2</td>
+</tr>
+</tbody>
+</table></div>
+<p>表格假設契約可適用上述一般權利金拆分，不包含手續費與任何買賣價差。<strong>價外選擇權也可能有正的時間價值</strong>，因為尚有到期前轉價內的可能性。</p>
+</section><section class="article-section" id="iv"><span class="section-label">03 / IV</span><h2>IV 是市場價格隱含的波動假設</h2><p><strong>隱含波動率（Implied Volatility, IV）</strong>是將實際觀察的選擇權權利金、標的價格、履約價、期限等輸入反推至某一選擇權定價模型所得到的波動率參數。它不是已經發生的歷史波動率，也<strong>不是價格會往哪個方向走的預測</strong>。</p>
+<p>在其他條件近似不變時，提高 IV 通常會推升標準 Call 與 Put 的理論價值，因為較大的可能波動對買權利的一方有價值；但不同履約價、到期日的 IV 可能不同，形成 Smile / Skew / Term Structure。事件前後的 IV 變動，亦可能抵銷標的方向的有利變化。</p>
+<blockquote>
+<p><strong>補充：</strong> 常見定價模型包括 Black–Scholes（特定假設下的歐式選擇權）以及其他樹狀或數值模型。模型輸出依賴波動率、利率、股利、履約／交割制度；不宜把模型價視為保證成交價。</p>
+</blockquote>
+</section><section class="article-section" id="case"><span class="section-label">04 / CASE</span><h2>實例：猜對方向還是可能虧損</h2><p>假設買進每股價格 USD 5 的 Call，K = USD 100。即使到期標的升至 USD 103，Call 的到期內含價值只有 USD 3，<strong>Net P&amp;L = 3 − 5 = −USD 2／股</strong>。買對方向不等於超過買入成本。</p>
+<p>在尚未到期時，若標的上漲但 IV 下跌、時間流逝，權利金也可能不漲反跌。請把「標的價格方向」「IV」「Theta 時間耗損」「原先支付的權利金」分開分析。對照 <a href="../../lab/index.html">Payoff Lab</a> 可練習到期結果，但 Lab <strong>不模擬 IV 或到期前市價</strong>。</p>
+</section><section class="article-section" id="check"><span class="section-label">05 / CHECK</span><h2>自我檢查與參考資料</h2><details class="quiz"><summary>Q1：Call 的 S = 108、K = 100、Premium = 12，時間價值是多少？</summary><p>內含價值為 8；時間價值為 12 − 8 = <strong>USD 4／股</strong>（假設，不計成本）。</p></details>
+
+<details class="quiz"><summary>Q2：IV 上升代表標的一定上漲嗎？</summary><p><strong>不是。</strong> IV 主要對應定價模型中的未來波動率參數，並非上漲方向預測。</p></details>
+
+<p><strong>公開參考：</strong> <a href="https://www.optionseducation.org/optionsoverview/options-pricing">Options Industry Council — Options Pricing</a>；<a href="https://www.optionseducation.org/theoptionseducationcenter/learning-resources-by-topic/greeks-and-volatility">OIC — Greeks and Volatility</a>。</p>
+</section><a class="next-card" href="../chapter-04/index.html"><div><b>Next Chapter · Option Greeks｜五大敏感度</b><p>延伸到下一個主題，從價格拆解到完整風險觀念。</p></div><span>前往第 4 章 →</span></a></article></div></main>
+<footer class="footer"><div class="container footer-inner"><div><strong>Derivatives Academy <span style="color:var(--teal)">/</span> 衍生性金融商品知識庫</strong><p>本站內容僅供金融教育與概念研究，不構成投資建議、商品推薦或交易報價。所有數值均為標示假設的教學示例，實際交易應依契約條款與適用法規判斷。</p><small>© <span data-current-year>2026</span> Derivatives Academy · Static GitHub Pages project</small></div><div class="footer-links"><a href="../../index.html">首頁</a><a href="../../lab/index.html">模擬器</a><a href="../../tests.html">品質驗證</a></div></div></footer><script src="../../assets/main.js" defer></script></body></html>

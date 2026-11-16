@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><meta name="description" content="學會 Delta、Gamma、Theta、Vega 與 Rho 的單位、方向與互動，避免把近似值誤用成保證。"><title>Options 101 第 4 章｜Option Greeks｜五大敏感度 | Derivatives Academy</title><link rel="stylesheet" href="../../assets/style.css"></head><body>
+<a href="#main" style="position:absolute;left:-10000px;top:auto">跳至主要內容</a>
+<header class="topbar"><div class="topbar-inner"><a href="../../index.html" class="brand"><span class="brand-mark" aria-hidden="true">Δ</span><span>Derivatives Academy</span></a><nav class="topnav" aria-label="主要導覽"><a href="../../index.html#library">商品知識庫</a><a href="../../options-101/chapter-01/index.html" aria-current="page">Options 101</a><a href="../../lab/index.html">Payoff Lab</a></nav></div></header>
+<main id="main"><div class="page-hero"><div class="container"><div class="breadcrumbs"><a href="../../index.html">首頁</a><span>/</span><a href="../../index.html#options">Options 101</a><span>/</span>04｜Option Greeks｜五大敏感度</div><div class="eyebrow">OPTIONS 101 / CHAPTER 04</div><h1>04｜Option Greeks｜五大敏感度</h1><p class="lede">學會 Delta、Gamma、Theta、Vega 與 Rho 的單位、方向與互動，避免把近似值誤用成保證。</p><div class="pill-row"><span class="tag teal">Foundations</span><span class="tag">約 11 分鐘</span><span class="tag gold">教學案例均為假設</span></div></div></div><div class="container article-layout"><aside class="toc" aria-label="章節導覽"><h2>On this page</h2><a href="#overview">Greeks 不是預言，是局部敏感度</a><a href="#matrix">五個 Greek 一表看懂</a><a href="#example">Delta + Gamma 兩層變化</a><a href="#risk">Theta 與 Vega 為何能吃掉方向獲利？</a><a href="#quiz">實務練習與參考資料</a></aside><article class="article-body"><section class="article-section" id="overview"><span class="section-label">01 / OVERVIEW</span><h2>Greeks 不是預言，是局部敏感度</h2><p><strong>Greeks（希臘字母敏感度）</strong>是在選擇權估值模型下，衡量價格相對於某一個輸入參數變動的「局部近似變化」。它可以幫助交易員拆解部位風險，但不是價格保證，也不代表其他因素同時不動時會真的發生。</p>
+<p>為避免單位混淆，本章以<strong>每股、USD 計價的標準歐式股票 Call</strong> 為假設例子。FX Option 可能涉及雙幣利率、Delta 慣例以及報價幣別，不能直接複製這些數字當交易室報價。</p>
+<blockquote>
+<p><strong>核心直覺：</strong> Delta 看方向、Gamma 看 Delta 怎麼改變、Theta 看時間、Vega 看 IV、Rho 看利率。</p>
+</blockquote>
+</section><section class="article-section" id="matrix"><span class="section-label">02 / MATRIX</span><h2>五個 Greek 一表看懂</h2><div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>Greek</th>
+  <th>主要衡量</th>
+  <th>常用解讀（以示例單位）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Delta（Δ）</td>
+  <td>標的價格變動對選擇權價格影響</td>
+  <td>標的 +USD 1，理論權利金約變化 Δ 美元／股</td>
+</tr>
+<tr>
+  <td>Gamma（Γ）</td>
+  <td>Delta 對標的價格的變動敏感度</td>
+  <td>標的 +USD 1，Δ 約變化 Γ</td>
+</tr>
+<tr>
+  <td>Theta（Θ）</td>
+  <td>時間流逝的價格敏感度</td>
+  <td>一天後、其他條件不變的約略價格改變</td>
+</tr>
+<tr>
+  <td>Vega（V）</td>
+  <td>波動率變動的價格敏感度</td>
+  <td>IV <strong>上升 1 個百分點</strong>時的約略價格變化（須確認報價尺度）</td>
+</tr>
+<tr>
+  <td>Rho（ρ）</td>
+  <td>利率變動的價格敏感度</td>
+  <td>利率變動 <strong>1 個百分點</strong>時的約略價格變化（須確認尺度）</td>
+</tr>
+</tbody>
+</table></div>
+<p>標準未避險的多頭 Call，一般具有正 Delta、正 Gamma、負 Theta、正 Vega；但特定契約與持倉組合的 Greeks 可不同。<strong>Greek 的大小、尺度與方向，必須連同部位、模型、到期日與計量單位閱讀。</strong></p>
+</section><section class="article-section" id="example"><span class="section-label">03 / EXAMPLE</span><h2>Delta + Gamma 兩層變化</h2><p>假設某 Call 的 Delta = 0.55、Gamma = 0.04（每股 USD 計價、每 USD 變動的假設模型結果）。標的若小幅上漲 USD 1：</p>
+<div class="formula">一階價格近似：ΔOption ≈ Delta × ΔS = 0.55 × 1 = +USD 0.55／股<br>含二階的 Taylor 近似：ΔOption ≈ 0.55×1 + 0.5×0.04×1² = +USD 0.57／股<br>Delta 的近似改變 ≈ Gamma × ΔS = 0.04 × 1 = +0.04</div>
+<p>兩種算法都只是<strong>局部近似</strong>。大幅跳空、IV 與時間同時變化時，應重新估價，不能把 0.57 當確定收益。Short Call 的部位 Greeks 方向通常與同規格 Long Call 相反。</p>
+</section><section class="article-section" id="risk"><span class="section-label">04 / RISK</span><h2>Theta 與 Vega 為何能吃掉方向獲利？</h2><p>假設你買了 Call，標的價格上漲會帶來正 Delta 效果；但若時間過去一週、IV 又下降，<strong>負 Theta 和正 Vega 對 IV 下跌的反應</strong>可能使總權利金減少。反之，賣方可能從時間流逝受益，但要承擔大漲與 Gamma 跳升的風險。</p>
+<p><strong>不要直接將所有 Greek 的數字相加</strong>：必須先統一時間、價格、IV 百分點與計價單位。對跨天或大幅波動，應做完整重估及情境分析。</p>
+</section><section class="article-section" id="quiz"><span class="section-label">05 / QUIZ</span><h2>實務練習與參考資料</h2><details class="quiz"><summary>Q1：Vega = 0.10（每 1 個 IV 百分點），IV 從 20% 升到 21%，價格約怎麼變？</summary><p>在其他條件近似不變時，模型價格約 <strong>+USD 0.10／股</strong>。若 Vega 的報價尺度不同，不能套用。</p></details>
+
+<details class="quiz"><summary>Q2：Long Call 的 Delta = 0.55 代表 55% 機率獲利嗎？</summary><p><strong>不是。</strong> Delta 是價格敏感度；以特定模型可有機率相關的近似解讀，但不等於實際賺錢機率。</p></details>
+
+<p><strong>公開參考：</strong> <a href="https://www.optionseducation.org/theoptionseducationcenter/learning-resources-by-topic/greeks-and-volatility">OIC — Understanding Options Greeks</a>；<a href="https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/options-strategies">CFA Institute — Options Strategies</a>。</p>
+</section><a class="next-card" href="../chapter-05/index.html"><div><b>Next Chapter · Option Strategies｜組合策略與避險</b><p>延伸到下一個主題，從價格拆解到完整風險觀念。</p></div><span>前往第 5 章 →</span></a></article></div></main>
+<footer class="footer"><div class="container footer-inner"><div><strong>Derivatives Academy <span style="color:var(--teal)">/</span> 衍生性金融商品知識庫</strong><p>本站內容僅供金融教育與概念研究，不構成投資建議、商品推薦或交易報價。所有數值均為標示假設的教學示例，實際交易應依契約條款與適用法規判斷。</p><small>© <span data-current-year>2026</span> Derivatives Academy · Static GitHub Pages project</small></div><div class="footer-links"><a href="../../index.html">首頁</a><a href="../../lab/index.html">模擬器</a><a href="../../tests.html">品質驗證</a></div></div></footer><script src="../../assets/main.js" defer></script></body></html>

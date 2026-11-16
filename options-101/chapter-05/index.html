@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><meta name="description" content="從 Protective Put、Covered Call、Bull Call Spread 到 Collar，看懂保護成本與獲利上限。"><title>Options 101 第 5 章｜Option Strategies｜組合策略與避險 | Derivatives Academy</title><link rel="stylesheet" href="../../assets/style.css"></head><body>
+<a href="#main" style="position:absolute;left:-10000px;top:auto">跳至主要內容</a>
+<header class="topbar"><div class="topbar-inner"><a href="../../index.html" class="brand"><span class="brand-mark" aria-hidden="true">Δ</span><span>Derivatives Academy</span></a><nav class="topnav" aria-label="主要導覽"><a href="../../index.html#library">商品知識庫</a><a href="../../options-101/chapter-01/index.html" aria-current="page">Options 101</a><a href="../../lab/index.html">Payoff Lab</a></nav></div></header>
+<main id="main"><div class="page-hero"><div class="container"><div class="breadcrumbs"><a href="../../index.html">首頁</a><span>/</span><a href="../../index.html#options">Options 101</a><span>/</span>05｜Option Strategies｜組合策略與避險</div><div class="eyebrow">OPTIONS 101 / CHAPTER 05</div><h1>05｜Option Strategies｜組合策略與避險</h1><p class="lede">從 Protective Put、Covered Call、Bull Call Spread 到 Collar，看懂保護成本與獲利上限。</p><div class="pill-row"><span class="tag teal">Foundations</span><span class="tag">約 12 分鐘</span><span class="tag gold">教學案例均為假設</span></div></div></div><div class="container article-layout"><aside class="toc" aria-label="章節導覽"><h2>On this page</h2><a href="#purpose">先定義要管理的風險</a><a href="#four">四種常見組合與用途</a><a href="#spread">完整算例：Bull Call Spread</a><a href="#hedge">完整算例：Protective Put</a><a href="#test">辨識風險並練習</a></aside><article class="article-body"><section class="article-section" id="purpose"><span class="section-label">01 / PURPOSE</span><h2>先定義要管理的風險</h2><p>選擇權策略不只是押漲跌，而是將<strong>方向、波動、期限與最大可承受損失</strong>組合成有明確代價的部位。單獨買一張 Call，和搭配持股的 Protective Put、限制報酬的 Covered Call，解決的問題不同。</p>
+<p>以下所有示例使用同一標的、相同到期日、每股 USD 計價的歐式到期現金結算模型，先不計交易成本、股利、資金利息與提前履約。實際股票選擇權可能是美式並有提前指派風險，不能照搬簡化模型。</p>
+<blockquote>
+<p><strong>原則：</strong> 每加入一條選擇權腿，都應重新計算成本、最大虧損、最大獲利與到期損益兩平點。</p>
+</blockquote>
+</section><section class="article-section" id="four"><span class="section-label">02 / FOUR</span><h2>四種常見組合與用途</h2><div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>策略</th>
+  <th>組合</th>
+  <th>主要取捨</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Protective Put</td>
+  <td>持有標的 + 買 Put</td>
+  <td>花保費限制標的下跌損失</td>
+</tr>
+<tr>
+  <td>Covered Call</td>
+  <td>持有標的 + 賣 Call</td>
+  <td>收權利金，讓渡高於履約價的部分上漲</td>
+</tr>
+<tr>
+  <td>Bull Call Spread</td>
+  <td>買低 K Call + 賣高 K Call</td>
+  <td>降低淨成本，同時封頂潛在獲利</td>
+</tr>
+<tr>
+  <td>Collar</td>
+  <td>持有標的 + 買 Put + 賣 Call</td>
+  <td>用賣 Call 權利金抵銷部分保護成本，限制兩端</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Short Straddle（同 K 同到期賣 Call + 賣 Put）</strong>看似可收兩筆 Premium，但沒有標的保護時，價格大幅波動會造成重大、甚至一側理論無上限的損失，不適合單純以「收權利金」概括。</p>
+</section><section class="article-section" id="spread"><span class="section-label">03 / SPREAD</span><h2>完整算例：Bull Call Spread</h2><p>假設同一股票，買 K = USD 100 Call、付 Premium USD 7；同時賣 K = USD 110 Call、收 Premium USD 3。兩腿均為<strong>每股、同到期、假設</strong>，起初淨支付 <code>7 − 3 = USD 4／股</code>。</p>
+<div class="formula">Spread 到期 Net P&amp;L = max(Sₜ−100,0) − max(Sₜ−110,0) − 4<br>最大損失 = USD 4／股；最大獲利 = (110−100)−4 = USD 6／股<br>到期損益兩平點 = USD 104／股</div>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>假設到期 Sₜ</th>
+  <th style="text-align:right">兩腿 Payoff 合計</th>
+  <th style="text-align:right">扣淨權利金 USD 4 後的 Net P&amp;L</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>USD 95</td>
+  <td style="text-align:right">0</td>
+  <td style="text-align:right"><strong>−USD 4／股</strong></td>
+</tr>
+<tr>
+  <td>USD 104</td>
+  <td style="text-align:right">4</td>
+  <td style="text-align:right"><strong>USD 0／股</strong></td>
+</tr>
+<tr>
+  <td>USD 120</td>
+  <td style="text-align:right">10</td>
+  <td style="text-align:right"><strong>+USD 6／股</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>相較單買 K100 Call，賣出 K110 Call 降低了淨成本，但也把最大收益封頂。這裡是<strong>到期每股淨額</strong>；若合約乘數 100 股，需再乘 100，尚未計費用。</p>
+</section><section class="article-section" id="hedge"><span class="section-label">04 / HEDGE</span><h2>完整算例：Protective Put</h2><p>假設你以 USD 100／股買入股票，同時支付 USD 3／股買進 K = USD 95 Put（同到期）。你的整體到期盈虧為：</p>
+<div class="formula">Protective Put Net P&amp;L = (Sₜ − 100) + max(95 − Sₜ,0) − 3<br>當 Sₜ ≤ 95，最大到期損失 = 95 − 100 − 3 = −USD 8／股</div>
+<p>若 Sₜ = USD 80，股票損失 −20、Put Payoff +15、已付權利金 −3，合計 <strong>−USD 8／股</strong>；若 Sₜ = USD 120，股票收益 +20、Put 到期歸零，合計 <strong>+USD 17／股</strong>。保護有成本，Put 也不保護所有風險（例如流動性、信用與執行錯配）。</p>
+</section><section class="article-section" id="test"><span class="section-label">05 / TEST</span><h2>辨識風險並練習</h2><details class="quiz"><summary>Q1：Bull Call Spread 的上下履約價是 100 / 110，淨 Debit = 4，最大利潤是多少？</summary><p>價差寬度 10 扣淨權利金 4，最大到期淨利為 <strong>USD 6／股</strong>（假設，不計成本）。</p></details>
+
+<details class="quiz"><summary>Q2：Covered Call 是免費多賺一筆收入嗎？</summary><p><strong>不是。</strong> 你仍承擔持有標的下跌風險，而且出售 Call 讓渡一定程度的上漲潛能，可能有提前指派風險。</p></details>
+
+<p><strong>公開參考：</strong> <a href="https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/options-strategies">CFA Institute — Options Strategies</a>；<a href="https://www.optionseducation.org/strategies/all-strategies-en">OIC — All Strategies</a>。</p>
+</section><a class="next-card" href="../chapter-06/index.html"><div><b>Next Chapter · Applied Derivatives｜外匯避險實務</b><p>延伸到下一個主題，從價格拆解到完整風險觀念。</p></div><span>前往第 6 章 →</span></a></article></div></main>
+<footer class="footer"><div class="container footer-inner"><div><strong>Derivatives Academy <span style="color:var(--teal)">/</span> 衍生性金融商品知識庫</strong><p>本站內容僅供金融教育與概念研究，不構成投資建議、商品推薦或交易報價。所有數值均為標示假設的教學示例，實際交易應依契約條款與適用法規判斷。</p><small>© <span data-current-year>2026</span> Derivatives Academy · Static GitHub Pages project</small></div><div class="footer-links"><a href="../../index.html">首頁</a><a href="../../lab/index.html">模擬器</a><a href="../../tests.html">品質驗證</a></div></div></footer><script src="../../assets/main.js" defer></script></body></html>

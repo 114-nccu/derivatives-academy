@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><meta name="description" content="把工具選擇放回企業現金流：辨識風險、比較 Forward／Option、檢查剩餘暴露與執行成本。"><title>Options 101 第 6 章｜Applied Derivatives｜外匯避險實務 | Derivatives Academy</title><link rel="stylesheet" href="../../assets/style.css"></head><body>
+<a href="#main" style="position:absolute;left:-10000px;top:auto">跳至主要內容</a>
+<header class="topbar"><div class="topbar-inner"><a href="../../index.html" class="brand"><span class="brand-mark" aria-hidden="true">Δ</span><span>Derivatives Academy</span></a><nav class="topnav" aria-label="主要導覽"><a href="../../index.html#library">商品知識庫</a><a href="../../options-101/chapter-01/index.html" aria-current="page">Options 101</a><a href="../../lab/index.html">Payoff Lab</a></nav></div></header>
+<main id="main"><div class="page-hero"><div class="container"><div class="breadcrumbs"><a href="../../index.html">首頁</a><span>/</span><a href="../../index.html#options">Options 101</a><span>/</span>06｜Applied Derivatives｜外匯避險實務</div><div class="eyebrow">OPTIONS 101 / CHAPTER 06</div><h1>06｜Applied Derivatives｜外匯避險實務</h1><p class="lede">把工具選擇放回企業現金流：辨識風險、比較 Forward／Option、檢查剩餘暴露與執行成本。</p><div class="pill-row"><span class="tag teal">Foundations</span><span class="tag">約 12 分鐘</span><span class="tag gold">教學案例均為假設</span></div></div></div><div class="container article-layout"><aside class="toc" aria-label="章節導覽"><h2>On this page</h2><a href="#framework">先找現金流，再選商品</a><a href="#choices">Forward、Option、Swap 各解什麼問題？</a><a href="#example">美元進口商：鎖定成本或保留有利方向</a><a href="#workflow">交易室風險管理檢核</a><a href="#practice">實務問答與下一步</a></aside><article class="article-body"><section class="article-section" id="framework"><span class="section-label">01 / FRAMEWORK</span><h2>先找現金流，再選商品</h2><p>交易室或企業避險最先問的不是「會不會上漲」，而是：<strong>誰、在何時、需要支付或收到什麼幣別、金額有多確定？</strong></p>
+<p>評估衍生商品時，建議先整理五項：<code>幣別與報價方向 → 受影響的現金流 → 金額與期限 → 風險容忍度 → 合約及流動性限制</code>。同樣一個美元走強情境，進口商美元應付和出口商美元應收的方向可能完全不同。</p>
+<p>本章僅用教學假設做比較，不提供即時外匯報價、交易建議或特定商品適合性判斷。</p>
+</section><section class="article-section" id="choices"><span class="section-label">02 / CHOICES</span><h2>Forward、Option、Swap 各解什麼問題？</h2><div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>工具</th>
+  <th>主要目的</th>
+  <th>應注意的限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><a href="../../products/fx-forward/index.html">FX Forward</a></td>
+  <td>事先確定未來特定日期換匯率</td>
+  <td>有交割義務，也可能放棄有利方向</td>
+</tr>
+<tr>
+  <td><a href="../../products/fx-vanilla-option/index.html">FX Vanilla Option</a></td>
+  <td>支付 Premium 換取履約權利</td>
+  <td>權利金成本、到期／履約條款及波動率</td>
+</tr>
+<tr>
+  <td><a href="../../products/fx-swap/index.html">FX Swap</a></td>
+  <td>安排近端與遠端兩次反向換匯、管理幣別資金期限</td>
+  <td>必須備妥遠端交割幣別，存在資金與 MTM 風險</td>
+</tr>
+<tr>
+  <td><a href="../../products/dci/index.html">DCI</a></td>
+  <td>結構型投資／收益與條件式到期換匯</td>
+  <td>可能轉成非原始幣別、承擔本金及發行人風險</td>
+</tr>
+</tbody>
+</table></div>
+<p>這些工具不是同一目的的完美替代品。<strong>DCI 不是標準的企業美元應付款避險工具</strong>，不應只因潛在票息就用來取代原本的風險管理策略。</p>
+</section><section class="article-section" id="example"><span class="section-label">03 / EXAMPLE</span><h2>美元進口商：鎖定成本或保留有利方向</h2><p>假設三個月後要支付 <strong>USD 100,000</strong> 貨款。為比較概念，假設三個月 USD Forward 匯率 <strong>USD/TWD 32.20</strong>，同期限 USD Call（買 USD／賣 TWD）履約匯率 <strong>32.20</strong>、權利金 <strong>TWD 0.30／USD</strong>，且到期以 USD/TWD 即期匯率作為履約比較。三項均為<strong>獨立教學假設</strong>，不是由同一套波動率／利差模型推導的無套利市場報價。</p>
+<div class="formula">遠期換匯成本 = USD 100,000 × 32.20 = TWD 3,220,000<br>買 USD Call 的簡化到期換匯成本 = USD 100,000 × [min(Sₜ, 32.20) + 0.30]</div>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>假設到期即期 USD/TWD</th>
+  <th style="text-align:right">Forward 支付 TWD</th>
+  <th style="text-align:right">Option 方案：換匯＋權利金 TWD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>31.00</td>
+  <td style="text-align:right">3,220,000</td>
+  <td style="text-align:right">3,130,000（以即期買美元）</td>
+</tr>
+<tr>
+  <td>33.00</td>
+  <td style="text-align:right">3,220,000</td>
+  <td style="text-align:right">3,250,000（執行 Call）</td>
+</tr>
+</tbody>
+</table></div>
+<p>Option 方案的 Premium 通常在建立部位時支付；表格將其<strong>名目加總</strong>方便比較，未折現權利金至同一時點，也未計費用、匯率波動對權利金幣別的影響及實際交割安排。因此這不是嚴格同一估值日的 P&amp;L 比較。</p>
+</section><section class="article-section" id="workflow"><span class="section-label">04 / WORKFLOW</span><h2>交易室風險管理檢核</h2><p>實務上，報價、簽約與後續管理不能只看公式。應再次確認：</p>
+<ol>
+<li><strong>曝險真實性：</strong> 是否確有 USD 應付？金額、付款日與訂單取消概率是多少？</li>
+<li><strong>比價單位：</strong> FX 報價方向、Premium 幣別、點數、名目本金及交易費用是否相同？</li>
+<li><strong>流動性及信用：</strong> 授信額度、擔保需求、交易對手違約、交割時間差。</li>
+<li><strong>情境及壓力測試：</strong> 美元升值、貶值、付款延後、企業收入下修時各會怎樣？</li>
+<li><strong>持續監控：</strong> 到期提醒、財務報表／避險會計（如適用）、提前結清價格與風險歸屬。</li>
+</ol>
+<p><strong>避險成功</strong>應定義為相對於企業真實風險目標減少不確定性，而不是每筆衍生商品單獨都有正 P&amp;L。</p>
+</section><section class="article-section" id="practice"><span class="section-label">05 / PRACTICE</span><h2>實務問答與下一步</h2><details class="quiz"><summary>Q1：Option 方案在 USD/TWD 33.00 時，比 Forward 更貴，因此 Option 一定比較差嗎？</summary><p><strong>不能只看單一情境。</strong> Option 的成本來自保留有利方向的權利，還需要比較整個分配、尾端風險與 Premium 的資金成本。</p></details>
+
+<details class="quiz"><summary>Q2：公司付款日延後，原 Forward 就可以不交割嗎？</summary><p><strong>不可以自行取消。</strong> 應核對契約並協調展期／平倉，可能有 MTM 損益與交易費用。</p></details>
+
+<details class="quiz"><summary>Q3：我能直接用 FX Option 的到期 Payoff Lab 計算企業完整避險成效嗎？</summary><p>不行。<a href="../../lab/index.html">Payoff Lab</a> 只計標準到期選擇權淨損益，未納入實際採購現金流、融資成本、契約交割與會計處理。</p></details>
+
+<p><strong>公開參考：</strong> <a href="https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/options-strategies">CFA Institute — Options Strategies</a>；<a href="https://www.cftc.gov/MarketReports/SwapsReports/DataDictionary/index.htm">CFTC — Swaps Report Data Dictionary</a>。</p>
+</section><a class="next-card" href="../../index.html#library"><div><b>完成 Options 101 · 延伸閱讀商品知識庫</b><p>用剛學到的觀念閱讀已發布的金融商品。</p></div><span>探索商品知識庫 →</span></a></article></div></main>
+<footer class="footer"><div class="container footer-inner"><div><strong>Derivatives Academy <span style="color:var(--teal)">/</span> 衍生性金融商品知識庫</strong><p>本站內容僅供金融教育與概念研究，不構成投資建議、商品推薦或交易報價。所有數值均為標示假設的教學示例，實際交易應依契約條款與適用法規判斷。</p><small>© <span data-current-year>2026</span> Derivatives Academy · Static GitHub Pages project</small></div><div class="footer-links"><a href="../../index.html">首頁</a><a href="../../lab/index.html">模擬器</a><a href="../../tests.html">品質驗證</a></div></div></footer><script src="../../assets/main.js" defer></script></body></html>
